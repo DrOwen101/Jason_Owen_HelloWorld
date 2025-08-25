@@ -1,45 +1,56 @@
-public class HelloWorld {
-	private String name;
-	private int age;
+/**
+ * The HelloWorld class represents a person with a name and optional age.
+ * It provides methods to greet and introduce the person.
+ */
+import java.util.logging.Logger;
 
+public class HelloWorld {
+	private final String name;
+	private final int age;
+	private static final Logger logger = Logger.getLogger(HelloWorld.class.getName());
+
+	/**
+	 * Constructs a HelloWorld object with a name only.
+	 * @param name the name of the person
+	 */
 	public HelloWorld(String name) {
 		this.name = name;
 		this.age = -1; // Default value if age not provided
 	}
 
+	/**
+	 * Constructs a HelloWorld object with a name and age.
+	 * @param name the name of the person
+	 * @param age the age of the person
+	 */
 	public HelloWorld(String name, int age) {
 		this.name = name;
 		this.age = age;
 	}
 
+	/**
+	 * Greets the person with a default message.
+	 */
 	public void greet() {
-		System.out.println("Hello, " + name + "!");
+		logger.info(String.format("Hello, %s!", name));
 	}
 
-	// Overloaded greet method with custom message
+	/**
+	 * Greets the person with a custom message.
+	 * @param message the custom message to use
+	 */
 	public void greet(String message) {
-		System.out.println(message + ", " + name + "!");
+		logger.info(String.format("%s, %s!", message, name));
 	}
 
+	/**
+	 * Introduces the person, including age if available.
+	 */
 	public void introduce() {
 		if (age >= 0) {
-			System.out.println("Hello, my name is " + name + " and I am " + age + " years old.");
+			logger.info(String.format("Hello, my name is %s and I am %d years old.", name, age));
 		} else {
-			System.out.println("Hello, my name is " + name + ".");
+			logger.info(String.format("Hello, my name is %s.", name));
 		}
-	}
-
-	public static void main(String[] args) {
-		// Using first constructor
-		HelloWorld student1 = new HelloWorld("Rico Suave");
-		student1.greet();
-		student1.greet("Welcome");
-		student1.introduce();
-
-		// Using second constructor
-		HelloWorld student2 = new HelloWorld("Jason", 25);
-		student2.greet();
-		student2.greet("Good morning");
-		student2.introduce();
 	}
 }
